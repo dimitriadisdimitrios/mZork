@@ -12,6 +12,7 @@
         android:padding="10dp"
         android:gravity="top|left"
         android:textColor="@color/white"
-        android:background="@color/black"/>
+        android:background="@color/black"
+        android:fontFamily="@font/pixel_font"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
