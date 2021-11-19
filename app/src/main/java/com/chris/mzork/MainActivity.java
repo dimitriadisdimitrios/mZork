@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private String mainText;
     private Boolean enableToErase;
     private Boolean systemNeedToAnswer = true; // Global private variable to trigger the times that need system to answer
+    private final static String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                System.out.println("");
-                Log.i("MainActivity", "");
+                Log.i(TAG, "");
             }
 
             @Override
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // Function that check if user erase
+    // Function that check if user should be able to erase text
     private void checkToBlockErase(String textToCheck){
         // Compare length of text before and after of changing to see if user is able to delete a character
         if (textToCheck.length() < mainText.length() && !enableToErase) {
