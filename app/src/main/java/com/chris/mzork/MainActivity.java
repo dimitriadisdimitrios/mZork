@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 // Save text before changing
-                if (disableUpdatedText){
+                if (disableUpdatedText) {
                     mainText = s.toString();
                 }
                 // Check if last character in text is '\n'
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 // Call function to check if need to block erasing
                 boolean needToRevertText = checkToBlockErase(s.toString());
                 disableUpdatedText = true;
-                if (needToRevertText || isAnswerEmpty){
+                if (needToRevertText || isAnswerEmpty) {
                     setOldTextToEditText();
                 } else {
                     appendAutoAnswer(s.toString());
@@ -61,17 +61,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     // Function that check if user should be able to erase text
-    private boolean checkToBlockErase(String textToCheck){
+    private boolean checkToBlockErase(String textToCheck) {
         // Compare length of text before and returns if text need erase or not
         return textToCheck.length() < mainText.length() && !enableToErase;
     }
 
-    private boolean checkIfAnswerIsEmpty(String textToCheck){
+    private boolean checkIfAnswerIsEmpty(String textToCheck) {
         String twoLastChar = textToCheck.substring(mainText.length() - 1);
         return twoLastChar.equals("\n\n");
     }
 
-    private void setOldTextToEditText(){
+    private void setOldTextToEditText() {
         mainText = mainText.substring(0, mainText.length() - 1) + "\n";
         disableUpdatedText = false;
         systemNeedToAnswer = false;
@@ -81,14 +81,15 @@ public class MainActivity extends AppCompatActivity {
         bind.etTextEditor.setSelection(mainText.length());
     }
 
-    /** Function that is responsible for auto-answering
+    /**
+     * Function that is responsible for auto-answering
      *
      * @param textUserAdded Text that user added
      */
-    private void appendAutoAnswer(String textUserAdded){
-        if(textUserAdded.length() > mainText.length()){
-            String lastCharOfNewText = textUserAdded.substring(textUserAdded.length() -1);
-            if (lastCharOfNewText.equals("\n") && systemNeedToAnswer){
+    private void appendAutoAnswer(String textUserAdded) {
+        if (textUserAdded.length() > mainText.length()) {
+            String lastCharOfNewText = textUserAdded.substring(textUserAdded.length() - 1);
+            if (lastCharOfNewText.equals("\n") && systemNeedToAnswer) {
                 systemNeedToAnswer = false;
                 String newTextWithAnswer = textUserAdded + "Add a new answer bellow:\n";
                 bind.etTextEditor.setText(newTextWithAnswer);
@@ -97,5 +98,10 @@ public class MainActivity extends AppCompatActivity {
                 systemNeedToAnswer = true;
             }
         }
+    }
+
+    //prevent the app to close when back button pressed
+    @Override
+    public void onBackPressed() {
     }
 }
