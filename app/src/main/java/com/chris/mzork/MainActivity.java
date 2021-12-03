@@ -28,7 +28,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(bind.getRoot());
 
         bind.etTextEditor.setText("Welcome. Please write something here:\n");
-        bind.etTextEditor.addTextChangedListener(new TextWatcher() {
+        //first text appears on screen
+        bind.etTextEditor.addTextChangedListener(new TextWatcher() { //This is to watch and control text that appears on screen
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
                 // Save text before changing
@@ -40,18 +41,19 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            public void onTextChanged(CharSequence s, int start, int before, int count) { //text while changing
                 Log.i(TAG, "");
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
+            public void afterTextChanged(Editable s) { //After the text changes
 
                 boolean isAnswerEmpty = checkIfAnswerIsEmpty(s.toString());
                 // Call function to check if need to block erasing
                 boolean needToRevertText = checkToBlockErase(s.toString());
                 disableUpdatedText = true;
-                if (needToRevertText || isAnswerEmpty) {
+                //call function to revent text changes
+                if (needToRevertText || isAnswerEmpty) { //This is to appear the same text if answer is empty
                     setOldTextToEditText();
                 } else {
                     appendAutoAnswer(s.toString());
@@ -60,12 +62,21 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // Function that check if user should be able to erase text
+    /**
+     * Function that check if user should be able to erase text
+     * @param textToCheck
+     * @return
+     */
     private boolean checkToBlockErase(String textToCheck) {
         // Compare length of text before and returns if text need erase or not
         return textToCheck.length() < mainText.length() && !enableToErase;
     }
 
+    /**
+     * Function that check if the answer is empty
+     * @param textToCheck
+     * @return
+     */
     private boolean checkIfAnswerIsEmpty(String textToCheck) {
         String twoLastChar = textToCheck.substring(mainText.length() - 1);
         return twoLastChar.equals("\n\n");
