@@ -82,8 +82,11 @@ public class MainActivity extends AppCompatActivity {
         return twoLastChar.equals("\n\n");
     }
 
+    /**
+     * revent text if user gave empty answer
+     */
     private void setOldTextToEditText() {
-        mainText = mainText.substring(0, mainText.length() - 1) + "\n";
+        mainText = mainText.substring(0, mainText.length() - 1) + "\n"; //check if last character is new line
         disableUpdatedText = false;
         systemNeedToAnswer = false;
         // Set editText with text before erasing
