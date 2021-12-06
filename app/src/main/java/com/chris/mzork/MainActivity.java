@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         //TODO: Comments here
         setContentView(bind.getRoot());
         //TODO: Comments here
-        bind.etTextEditor.setText("Welcome. Please write something here:\n");
+        bind.etTextEditor.setText(R.string.first_message);
         //first text appears on screen
         bind.etTextEditor.addTextChangedListener(new TextWatcher() { //This is to watch and control text that appears on screen
             @Override
@@ -126,16 +126,34 @@ public class MainActivity extends AppCompatActivity {
             if (lastCharOfNewText.equals("\n") && systemNeedToAnswer) {
                 //TODO: Comments here
                 systemNeedToAnswer = false;
-                String newTextWithAnswer = textUserAdded + "Add a new answer bellow:\n";
-                //TODO: Comments here
-                bind.etTextEditor.setText(newTextWithAnswer);
-                //TODO: Comments here
-                bind.etTextEditor.setSelection(newTextWithAnswer.length());
+                checkAnswer(textUserAdded);
             } else {
                 //TODO: Comments here
                 systemNeedToAnswer = true;
             }
         }
+    }
+
+    //TODO: Comments here
+    private void checkAnswer(String textUserAdded){
+        //TODO: Comments here
+        String newTextWithAnswer;
+        //TODO: Comments here
+        String[] messageList = textUserAdded.split("\n");
+        //TODO: Comments here
+        String userAnswer = messageList[messageList.length-1];
+        //TODO: Comments here
+        if (userAnswer.equals("1")){
+            //TODO: Comments here
+            newTextWithAnswer = textUserAdded + getResources().getString(R.string.test_message_accepted);
+        } else {
+            //TODO: Comments here
+            newTextWithAnswer = textUserAdded + getResources().getString(R.string.test_message_rejected);
+        }
+        //TODO: Comments here
+        bind.etTextEditor.setText(newTextWithAnswer);
+        //TODO: Comments here
+        bind.etTextEditor.setSelection(newTextWithAnswer.length());
     }
 
     //prevent the app to close when back button pressed
